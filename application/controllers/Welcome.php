@@ -36,7 +36,8 @@ class Welcome extends CI_Controller {
                     ->set_content_type('application/json')
                     ->set_output(
                         json_encode(array(
-                            'success'=>true,                                
+                            'success'=>true,    
+                            'session'=>$sessUser,                            
                         ))
           );        
         }else{
@@ -80,6 +81,45 @@ class Welcome extends CI_Controller {
         }     
         //$this->load->view('footer');
     }
+
+
+    public function PlanificacionRequisitos(){
+         if($this->session->userdata('nombre')=='instructores'){           
+            $this->load->view('header');
+            $this->load->view('PlanificacionRequisitos');   
+          }else{
+            echo "Acceso Denegado";
+         }     
+    }
+
+    public function CargarUnidades(){
+         if($this->session->userdata('nombre')=='instructores'){           
+            $unidades  = $this->MainModel->CargarUnidades();
+            $this->output
+                        ->set_content_type('application/json')
+                        ->set_output(
+                            json_encode(array(
+                                'success'=>true,                
+                                'unidades'=>$unidades,
+                            ))
+            );    
+         }   
+    }
+
+    public function CargaRequisitos(){
+         if($this->session->userdata('nombre')=='instructores'){           
+            $requisitos  = $this->MainModel->CargaRequisitos($this->input->post('id_unidad'));
+            $this->output
+                        ->set_content_type('application/json')
+                        ->set_output(
+                            json_encode(array(
+                                'success'=>true,                
+                                'requisitos'=>$requisitos,
+                            ))
+            );    
+         }   
+    }
+
 
     public function DetalleRequisitosEspecialidadAventurero(){
         if($this->session->userdata('nombre_largo')){           
@@ -268,6 +308,7 @@ class Welcome extends CI_Controller {
             echo "Acceso Denegado";
         }                
 	}
+
 
     
 

@@ -87,7 +87,12 @@
             data: ParamObjSend,         
             success: function(obj){
                 if(obj.success==true){
-                  location.href = '<?= base_url()?>index.php/Welcome/registro';
+                  if(obj.session.id_unidad==8){
+                    location.href = '<?= base_url()?>index.php/Welcome/PlanificacionRequisitos';  
+                  }else{
+                    location.href = '<?= base_url()?>index.php/Welcome/registro';  
+                  }
+                  
                 }else{
                   $('#error').html('<span class="badge badge-warning">Usuario y/o clave inorrectos</span>');
                 }

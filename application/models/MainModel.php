@@ -45,6 +45,17 @@ class MainModel extends CI_Model {
 			return $data->result();
 		}
 
+		public function CargarUnidades(){
+			$data= $this->db->get('unidad');
+			return $data->result();
+		}
+
+		public function CargaRequisitos($id_unidad){
+			$this->db->where('id_unidad',$id_unidad);
+			$data= $this->db->get('requisito');
+			return $data->result();
+		}
+
 		public function ValidaUsuario($nombre,$clave){
 			$this->db->where('nombre',$nombre);
 			$this->db->where('clave',$clave);
@@ -73,6 +84,7 @@ class MainModel extends CI_Model {
 			return $data->result();
 		}
 
+		
 		function CuentaRequisitosCumplidos($id_unidad){
 			$this->db->where('aventurero.id_unidad',$id_unidad);			
 			$this->db->from('detalle_registro');

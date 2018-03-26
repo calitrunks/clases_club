@@ -44,11 +44,14 @@
         </div>
         <!-- Sidebar Navigation Menus-->
         <div class="main-menu">
-          
           <ul id="side-main-menu" class="side-menu list-unstyled">                              
+          <?php if($this->session->userdata('id_unidad')!=8){?>        
             <li id="ac1"><a id="opc1" href="<?=base_url();?>index.php/welcome/registro"><i class="icon-list"></i>Requisito del día                             </a></li>
             <li id="ac2"><a id="opc2" href="<?=base_url();?>index.php/welcome/AgendaAnual"> <i class="icon-grid"></i>Agenda Anual             </a></li> 
-            <li id="ac3"><a id ="opc3" href="<?=base_url();?>index.php/welcome/AvanceAventurero"> <i class="icon-presentation"></i>% Avance x Aventurero                           </a></li>                   
+            <li id="ac3"><a id ="opc3" href="<?=base_url();?>index.php/welcome/AvanceAventurero"> <i class="icon-presentation"></i>% Avance x Aventurero    
+          <?php }else{ ?>                         </a></li>
+            <li><a href="<?=base_url();?>index.php/welcome/PlanificacionRequisitos">Planificacion Clases</a></li>                   
+          <?php } ?>  
           </ul>
         </div>        
       </div>
