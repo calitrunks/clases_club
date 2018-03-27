@@ -16,11 +16,11 @@
                 <div class="card-body"> 
                   <div class="col-lg-3">
                     <select onchange="CargaRequisitos()" class="form-control" name="unidades" id="unidades">
-                      
+                      <option value="0" disabled selected>--Seleccione--</option>
                     </select>
                   </div>                                                                                 <br>       
                   <div class="table-responsive">
-                    <table id="tbl_requisitos" class="table">
+                    <table id="tbl_requisitos" class="table table-responsive">
                       <thead>
                         <tr>
                           <th>Requisito</th>
@@ -84,30 +84,7 @@
             }
        }); 
 
-      // //Cargando Requisito
-      //  $.ajax({
-      //       type: "POST",
-      //       url: "<?= base_url()?>index.php/Welcome/ListaRequisitos",            
-      //       success: function(obj1){
-      //             var cadena = '';                
-      //             $('#tbl_requisitos tbody').empty();
-      //             $.each(obj1.lista, function (ind, elem) {
-      //               cadena = cadena + '<tr>';
-      //               cadena = cadena + '<td><span class="badge badge-warning">'+elem.fecha+'</span></td>';
-      //               cadena = cadena + '<td>'+elem.descripcion+'</td>';
-      //               if(elem.es_especialidad==1){
-      //                 cadena = cadena + '<td><button onclick="Modal_detalle_registro(\''+elem.id_encabezado+'\',\''+elem.fecha+'\',\''+elem.descripcion+'\',1,'+elem.id_requisito+')" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver Detalle</button></td>';  
-      //               }else{
-      //                   cadena = cadena + '<td><button onclick="Modal_detalle_registro(\''+elem.id_encabezado+'\',\''+elem.fecha+'\',\''+elem.descripcion+'\',0,'+elem.id_requisito+')" class="btn btn-info"><i class="fa fa-eye" aria-hidden="true"></i> Ver Detalle</button></td>';  
-      //               }
-                    
-      //               cadena = cadena + '/<tr>';
-      //             });                     
-      //             $('#tbl_requisitos').append(cadena);                  
-      //       }
-      //  }); 
-        
-      
+     
     
   });
 
@@ -127,7 +104,11 @@
                   $.each(obj.requisitos, function (ind, elem) {
                     cadena = cadena + '<tr>';
                     cadena = cadena + '<td>'+elem.descripcion+'</td>';                    
-                    cadena = cadena + '<td></td>';                    
+                    if(elem.fecha!=null){
+                      cadena = cadena + '<td><span class="badge badge-success">'+elem.fecha+'</span></td>';                      
+                    }else{
+                      cadena = cadena + '<td></td>';                      
+                    }                    
                     cadena = cadena + '/<tr>';
                   });                     
                   $('#tbl_requisitos').append(cadena);                                

@@ -50,9 +50,13 @@ class MainModel extends CI_Model {
 			return $data->result();
 		}
 
-		public function CargaRequisitos($id_unidad){
-			$this->db->where('id_unidad',$id_unidad);
-			$data= $this->db->get('requisito');
+		public function CargaRequisitos($id_unidad){			
+			$this->db->where('requisito.id_unidad',$id_unidad);
+			$this->db->from('requisito');
+			$this->db->join('encabezado_registro','encabezado_registro.id_requisito = requisito.id_requisito','left');
+			$this->db->select('descripcion, DATE_FORMAT(encabezado_registro.fecha, "%d-%m-%Y") fecha');
+			$this->db->order_by('requisito.id_requisito','ASC');
+			$data= $this->db->get();
 			return $data->result();
 		}
 
@@ -64,7 +68,7 @@ class MainModel extends CI_Model {
 		}
 
 		public function DetalleRequisitosEspecialidadAventurero($id_aventurero, $id_especialidad){
-			$sql = 	"SELECT descripcion, fecha_cumplido, requisito_especialidad.id_requisito_especialidad ";
+			$sql = 	"SELECT descripcion, DATE_FORMAT(fecha_cumplido, '%d-%m-%Y') fecha_cumplido, requisito_especialidad.id_requisito_especialidad ";
 			$sql = $sql . "FROM requisito_especialidad ";
 			$sql = $sql . "LEFT JOIN detalle_registro_especialidad  ";
 			$sql = $sql . "ON detalle_registro_especialidad.id_requisito_especialidad = requisito_especialidad.id_requisito_especialidad
