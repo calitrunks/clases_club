@@ -23,6 +23,8 @@
     <link rel="stylesheet" href="<?=base_url();?>public/css/style.default.css" id="theme-stylesheet">
     <!-- Custom stylesheet - for your changes-->
     <link rel="stylesheet" href="<?=base_url();?>public/css/custom.css">
+    <!-- DaterangePicker-->
+    <link rel="stylesheet" href="<?=base_url();?>public/css/daterangepicker.css">
     <!-- Favicon-->
     <link rel="shortcut icon" href="<?=base_url();?>public/img/favicon.ico">
     <!-- Tweaks for older IEs--><!--[if lt IE 9]>

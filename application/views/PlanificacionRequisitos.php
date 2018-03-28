@@ -63,6 +63,8 @@
     <script src="<?=base_url();?>public/vendor/chart.js/Chart.min.js"></script>
     <script src="<?=base_url();?>public/vendor/jquery-validation/jquery.validate.min.js"></script>
     <script src="<?=base_url();?>public/vendor/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="<?=base_url();?>public/js/moment.min.js"></script>
+    <script src="<?=base_url();?>public/js/daterangepicker.js"></script>    
     <!-- Main File-->
     <script src="<?=base_url();?>public/js/front.js"></script>
   </body>
@@ -83,6 +85,8 @@
                   $('#unidades').append(cadena);                  
             }
        }); 
+
+
 
      
     
@@ -105,13 +109,19 @@
                     cadena = cadena + '<tr>';
                     cadena = cadena + '<td>'+elem.descripcion+'</td>';                    
                     if(elem.fecha!=null){
-                      cadena = cadena + '<td><span class="badge badge-success">'+elem.fecha+'</span></td>';                      
+                      //Voy a tener que usar Datepicker
+                      cadena = cadena + '<td><input class="fecha" name="date_'+elem.id_requisito+'" id="date_'+elem.id_requisito+'" type="text"></td>';                                            
                     }else{
-                      cadena = cadena + '<td></td>';                      
+                      cadena = cadena + '<td><input class="fecha" name="date_'+elem.id_requisito+'" id="date_'+elem.id_requisito+'" type="text"></td>';                      
                     }                    
-                    cadena = cadena + '/<tr>';
+                    cadena = cadena + '/<tr>';                                                         
                   });                     
-                  $('#tbl_requisitos').append(cadena);                                
+                  $('#tbl_requisitos').append(cadena);      
+                   //Construyendo DatePicker 
+                    $('.fecha').daterangepicker({
+                    singleDatePicker: true,
+                    showDropdowns: true                    
+                    });                                 
             }
        }); 
    }

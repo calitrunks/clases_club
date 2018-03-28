@@ -54,7 +54,7 @@ class MainModel extends CI_Model {
 			$this->db->where('requisito.id_unidad',$id_unidad);
 			$this->db->from('requisito');
 			$this->db->join('encabezado_registro','encabezado_registro.id_requisito = requisito.id_requisito','left');
-			$this->db->select('descripcion, DATE_FORMAT(encabezado_registro.fecha, "%d-%m-%Y") fecha');
+			$this->db->select('descripcion, requisito.id_requisito, DATE_FORMAT(encabezado_registro.fecha, "%d-%m-%Y") fecha');
 			$this->db->order_by('requisito.id_requisito','ASC');
 			$data= $this->db->get();
 			return $data->result();
