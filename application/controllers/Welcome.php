@@ -92,6 +92,21 @@ class Welcome extends CI_Controller {
          }     
     }
 
+    public function AgendaRequisito(){
+        $data['id_requisito']=$this->input->post('id_requisito');
+        $date = new DateTime($this->input->post('fecha'));        
+        $data['fecha']=$date->format('Y-m-d');
+        $data['id_unidad']=$this->input->post('id_unidad');        
+        $this->MainModel->AgendaRequisito($data);
+        $this->output
+                        ->set_content_type('application/json')
+                        ->set_output(
+                            json_encode(array(
+                                'success'=>true        
+                            ))
+        );    
+    }
+
     public function CargarUnidades(){
          if($this->session->userdata('nombre')=='instructores'){           
             $unidades  = $this->MainModel->CargarUnidades();

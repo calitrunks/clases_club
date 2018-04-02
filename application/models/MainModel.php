@@ -113,6 +113,11 @@ class MainModel extends CI_Model {
 	 		return $this->db->insert_id();
 		}
 
+		public function AgendaRequisito($data){
+			$this->db->insert('encabezado_registro',$data);
+	 		return $this->db->insert_id();
+		}		
+
 		public function MarcaStatusRequisitoEspecialidad($data){
 			$this->db->insert('detalle_registro_especialidad',$data);
 	 		return $this->db->insert_id();

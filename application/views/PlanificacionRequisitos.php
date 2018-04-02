@@ -1,4 +1,11 @@
-     
+     <style>
+       .pendiente{
+        background-color: red;
+       }
+       .agendado{
+        background-color: green;        
+       }
+     </style>
       <section class="forms">
         <div class="container-fluid">
           <!-- Page Header-->
@@ -92,6 +99,28 @@
     
   });
 
+   function AgendaRequisito(id_requisito){      
+      var ParamObjSend={
+                 'fecha' :$("#date_"+id_requisito).val(),   
+                 'id_requisito' :id_requisito, 
+                 'id_unidad' :$('#unidades').val()                   
+      }      
+      console.log(ParamObjSend);
+      $.ajax({
+            type: "POST",
+            url: "<?= base_url()?>index.php/Welcome/AgendaRequisito",        
+            data: ParamObjSend,    
+            success: function(obj){
+                 if(obj.success==true){
+                    $('#td_'+id_requisito).html('<span class="badge badge-success">'+$("#date_"+id_requisito).val()+'</span>');
+                    $('.badge-success').css('font-size','14px');
+                 }                               
+            }
+       }); 
+
+
+   }
+
    function CargaRequisitos(){
 
      var ParamObjSend={
@@ -109,22 +138,27 @@
                     cadena = cadena + '<tr>';
                     cadena = cadena + '<td>'+elem.descripcion+'</td>';                    
                     if(elem.fecha!=null){
-                      //Voy a tener que usar Datepicker
-                      cadena = cadena + '<td><input class="fecha" name="date_'+elem.id_requisito+'" id="date_'+elem.id_requisito+'" type="text"></td>';                                            
+                      cadena = cadena + '<td><span class="badge badge-success">'+elem.fecha+'</span></td>';                                            
                     }else{
-                      cadena = cadena + '<td><input class="fecha" name="date_'+elem.id_requisito+'" id="date_'+elem.id_requisito+'" type="text"></td>';                      
+                      cadena = cadena + '<td id="td_'+elem.id_requisito+'"><input class="fecha pendiente" name="date_'+elem.id_requisito+'" onblur="AgendaRequisito('+elem.id_requisito+')" id="date_'+elem.id_requisito+'" type="text" value=""></td>';                      
                     }                    
                     cadena = cadena + '/<tr>';                                                         
                   });                     
-                  $('#tbl_requisitos').append(cadena);      
+                  $('#tbl_requisitos').append(cadena);     
+                   //
+                   $('.badge-success').css('font-size','14px');
                    //Construyendo DatePicker 
                     $('.fecha').daterangepicker({
+                    locale: {
+                      format: 'DD-MM-YYYY'
+                    },                    
                     singleDatePicker: true,
                     showDropdowns: true                    
                     });                                 
             }
        }); 
    }
+
 
   
 </script>
